@@ -1,0 +1,114 @@
+:root {
+  color-scheme: light;
+  --ink: #111111;
+  --muted: #5a5a5a;
+  --bg: #ffffff;
+  --link: #111111;
+  --link-hover: #0b5fff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Space Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono",
+    monospace;
+  color: var(--ink);
+  background: var(--bg);
+}
+
+.page {
+  min-height: 100vh;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 32px 72px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.nav {
+  display: flex;
+  gap: 24px;
+  font-size: 14px;
+}
+
+.nav a,
+.footer a,
+.content a {
+  color: var(--link);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.nav a:hover,
+.footer a:hover,
+.content a:hover {
+  color: var(--link-hover);
+  border-color: var(--link-hover);
+}
+
+.content {
+  max-width: 760px;
+  line-height: 1.7;
+}
+
+h1 {
+  font-size: clamp(32px, 5vw, 44px);
+  margin: 12px 0 6px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0 0 22px;
+}
+
+p {
+  margin: 0 0 16px;
+  font-size: 15px;
+}
+
+.section {
+  margin-top: 32px;
+}
+
+h2 {
+  font-size: 15px;
+  margin: 0 0 12px;
+  text-transform: lowercase;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.mono-link {
+  letter-spacing: 0.02em;
+}
+
+.footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-end;
+  gap: 18px;
+  font-size: 14px;
+}
+
+@media (max-width: 600px) {
+  .page {
+    padding: 32px 22px 56px;
+  }
+
+  .nav {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer {
+    justify-content: flex-start;
+  }
+}
