@@ -11,6 +11,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family: "Space Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono",
@@ -18,6 +22,8 @@ body {
   color: var(--ink);
   background: var(--bg);
 }
+
+/* ── page layout ── */
 
 .page {
   min-height: 100vh;
@@ -28,6 +34,56 @@ body {
   flex-direction: column;
   gap: 28px;
 }
+
+/* ── page-load fade-in ── */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.top,
+.content > h1,
+.content > .subtitle,
+.content > p,
+.content > .section,
+.footer {
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards;
+}
+
+.top                  { animation-delay: 0.05s; }
+.content > h1         { animation-delay: 0.12s; }
+.content > .subtitle  { animation-delay: 0.20s; }
+.content > p:nth-of-type(1) { animation-delay: 0.28s; }
+.content > p:nth-of-type(2) { animation-delay: 0.34s; }
+.content > p:nth-of-type(3) { animation-delay: 0.40s; }
+.content > .section:nth-of-type(1) { animation-delay: 0.48s; }
+.content > .section:nth-of-type(2) { animation-delay: 0.56s; }
+.footer               { animation-delay: 0.62s; }
+
+/* ── typing cursor on name ── */
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+
+h1::after {
+  content: "_";
+  display: inline-block;
+  margin-left: 2px;
+  font-weight: 400;
+  animation: blink 1s step-end infinite;
+}
+
+/* ── navigation ── */
 
 .nav {
   display: flex;
@@ -41,15 +97,22 @@ body {
   color: var(--link);
   text-decoration: none;
   border-bottom: 1px solid transparent;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  transition: color 0.2s ease, border-color 0.2s ease, letter-spacing 0.2s ease;
 }
 
 .nav a:hover,
-.footer a:hover,
+.footer a:hover {
+  color: var(--link-hover);
+  border-color: var(--link-hover);
+  letter-spacing: 0.06em;
+}
+
 .content a:hover {
   color: var(--link-hover);
   border-color: var(--link-hover);
 }
+
+/* ── content ── */
 
 .content {
   max-width: 760px;
@@ -72,6 +135,8 @@ p {
   font-size: 15px;
 }
 
+/* ── sections ── */
+
 .section {
   margin-top: 32px;
 }
@@ -80,6 +145,24 @@ h2 {
   font-size: 15px;
   margin: 0 0 12px;
   text-transform: lowercase;
+  position: relative;
+  display: inline-block;
+}
+
+/* animated underline on section headings */
+h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 1px;
+  background: var(--ink);
+  transition: width 0.4s ease;
+}
+
+.section:hover h2::after {
+  width: 100%;
 }
 
 .muted {
@@ -90,6 +173,24 @@ h2 {
   letter-spacing: 0.02em;
 }
 
+/* ── scroll reveal ── */
+
+.section {
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.section.reveal-hidden {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.section.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── footer ── */
+
 .footer {
   margin-top: auto;
   display: flex;
@@ -97,6 +198,8 @@ h2 {
   gap: 18px;
   font-size: 14px;
 }
+
+/* ── responsive ── */
 
 @media (max-width: 600px) {
   .page {
@@ -110,5 +213,17 @@ h2 {
 
   .footer {
     justify-content: flex-start;
+  }
+}
+
+/* ── reduced motion ── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
