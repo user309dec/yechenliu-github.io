@@ -62,24 +62,81 @@
     </div>
 
     <script>
-      // scroll-reveal: sections animate in when they enter the viewport
       document.addEventListener("DOMContentLoaded", () => {
-        const sections = document.querySelectorAll(".section");
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.remove("reveal-hidden");
-                entry.target.classList.add("reveal-visible");
-                observer.unobserve(entry.target);
+        const GLYPHS =
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*<>{}[]|/\\";
+        const TICK = 28;
+        const DECODE_MS = 420;
+        const GAP = 120;
+
+        function textNodes(root) {
+          const out = [];
+          const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+          while (w.nextNode())
+            if (w.currentNode.textContent.trim()) out.push(w.currentNode);
+          return out;
+        }
+
+        function decode(el) {
+          const nodes = textNodes(el);
+          if (!nodes.length) return;
+          const orig = nodes.map((n) => n.textContent);
+          const total = orig.reduce(
+            (s, t) => s + t.replace(/\s/g, "").length,
+            0
+          );
+          if (!total) return;
+          const perTick = Math.max(1, Math.ceil(total / (DECODE_MS / TICK)));
+          let revealed = 0;
+
+          const iv = setInterval(() => {
+            revealed = Math.min(total, revealed + perTick);
+            let count = 0;
+            nodes.forEach((node, i) => {
+              const src = orig[i];
+              let r = "";
+              for (let c = 0; c < src.length; c++) {
+                if (/\s/.test(src[c])) {
+                  r += src[c];
+                } else {
+                  count++;
+                  r +=
+                    count <= revealed
+                      ? src[c]
+                      : GLYPHS[(Math.random() * GLYPHS.length) | 0];
+                }
               }
+              node.textContent = r;
             });
-          },
-          { threshold: 0.15 }
-        );
-        sections.forEach((s) => {
-          s.classList.add("reveal-hidden");
-          observer.observe(s);
+
+            if (revealed >= total) {
+              clearInterval(iv);
+              nodes.forEach((n, i) => (n.textContent = orig[i]));
+            }
+          }, TICK);
+        }
+
+        // elements in visual top-to-bottom order
+        const lines = [
+          document.querySelector(".top"),
+          document.querySelector(".content > h1"),
+          document.querySelector(".content > .subtitle"),
+          ...document.querySelectorAll(".content > p:not(.subtitle)"),
+          document.querySelector("#projects > h2"),
+          document.querySelector("#projects > .muted"),
+          document.querySelector("#experience > h2"),
+          document.querySelector("#experience > .muted"),
+          document.querySelector("#experience > p:last-child"),
+          document.querySelector(".footer"),
+        ].filter(Boolean);
+
+        lines.forEach((el) => el.classList.add("scramble-line"));
+
+        lines.forEach((el, i) => {
+          setTimeout(() => {
+            el.classList.add("active");
+            decode(el);
+          }, 180 + i * GAP);
         });
       });
     </script>
