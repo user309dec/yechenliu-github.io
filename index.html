@@ -60,5 +60,28 @@
         <a href="https://github.com/user309dec" target="_blank" rel="noreferrer">[github]</a>
       </footer>
     </div>
+
+    <script>
+      // scroll-reveal: sections animate in when they enter the viewport
+      document.addEventListener("DOMContentLoaded", () => {
+        const sections = document.querySelectorAll(".section");
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.remove("reveal-hidden");
+                entry.target.classList.add("reveal-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15 }
+        );
+        sections.forEach((s) => {
+          s.classList.add("reveal-hidden");
+          observer.observe(s);
+        });
+      });
+    </script>
   </body>
 </html>
