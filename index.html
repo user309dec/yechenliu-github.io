@@ -203,6 +203,10 @@
           }, TICK);
         }
 
+        const prefersReducedMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches;
+
         // all text-bearing elements in DOM (visual) order
         const lines = document.querySelectorAll(
           ".top, .content > h1, .content > .subtitle, .content > p:not(.subtitle), " +
@@ -211,14 +215,18 @@
           "#experience > p:last-child, .footer"
         );
 
-        lines.forEach((el) => el.classList.add("scramble-line"));
+        if (prefersReducedMotion) {
+          lines.forEach((el) => el.classList.add("active"));
+        } else {
+          lines.forEach((el) => el.classList.add("scramble-line"));
 
-        lines.forEach((el, i) => {
-          setTimeout(() => {
-            el.classList.add("active");
-            decode(el);
-          }, 180 + i * GAP);
-        });
+          lines.forEach((el, i) => {
+            setTimeout(() => {
+              el.classList.add("active");
+              decode(el);
+            }, 180 + i * GAP);
+          });
+        }
       });
     </script>
   </body>
