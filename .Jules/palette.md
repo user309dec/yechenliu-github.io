@@ -1,3 +1,3 @@
-## 2024-05-15 - Focus Visible Styles for Link Navigation
-**Learning:** The portfolio relies on links for both internal section routing and external profiles, but lacked explicit focus states. Keyboard users would only see browser default focus rings, which often have low contrast against custom backgrounds.
-**Action:** Always pair `:hover` states with `:focus-visible` styles to ensure consistent, highly visible feedback for keyboard users without affecting the mouse experience.
+## 2024-05-24 - Respecting prefers-reduced-motion in JS-driven animations
+**Learning:** CSS `prefers-reduced-motion` media queries do not automatically stop JavaScript-driven animations (like `setTimeout` or `setInterval`). Screen reader users and others relying on these settings might still experience motion from JS if it's not explicitly disabled.
+**Action:** When implementing JS-driven animations, explicitly evaluate `window.matchMedia('(prefers-reduced-motion: reduce)').matches` to determine whether to apply the animation or instantly jump to the final state.
