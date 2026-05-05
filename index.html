@@ -213,7 +213,14 @@
 
         lines.forEach((el) => el.classList.add("scramble-line"));
 
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
         lines.forEach((el, i) => {
+          if (prefersReducedMotion) {
+            el.classList.add("active");
+            return;
+          }
+
           setTimeout(() => {
             el.classList.add("active");
             decode(el);
