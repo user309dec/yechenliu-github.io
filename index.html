@@ -150,6 +150,10 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          return;
+        }
+
         const GLYPHS =
           "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*<>{}[]|/\\";
         const TICK = 28;
