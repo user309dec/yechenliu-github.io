@@ -28,13 +28,10 @@
         <p class="subtitle">Mathematics + Computer Science · Rice University</p>
 
         <p>
-          I am Linus Liu, a mathematics and computer science student at Rice
-          University focused on backend systems, distributed infrastructure, and
-          applied machine learning.
+          I am Linus Liu, a mathematics and computer science student at Rice University focused on
+          backend systems, distributed infrastructure, and applied machine learning.
         </p>
-        <p>
-          My work emphasizes correctness, performance, and clear interfaces.
-        </p>
+        <p>My work emphasizes correctness, performance, and clear interfaces.</p>
         <p>
           Feel free to reach me at
           <a href="mailto:yl328@rice.edu">yl328@rice.edu</a>.
@@ -49,11 +46,22 @@
               <span class="entry-date">Sep 2025 – Present</span>
             </div>
             <div class="entry-sub">Lead Full Stack Developer · Rice University</div>
-            <p>AI-powered platform that transforms static documents into interactive learning games.</p>
+            <p>
+              AI-powered platform that transforms static documents into interactive learning games.
+            </p>
             <ul>
-              <li>Built modular frontend with React + TypeScript (Vite), using React Context for state management.</li>
-              <li>Integrated Google Gemini API for dynamic document parsing and low-latency content generation.</li>
-              <li>Designed event logging to capture user behavioral data for downstream statistical analysis.</li>
+              <li>
+                Built modular frontend with React + TypeScript (Vite), using React Context for state
+                management.
+              </li>
+              <li>
+                Integrated Google Gemini API for dynamic document parsing and low-latency content
+                generation.
+              </li>
+              <li>
+                Designed event logging to capture user behavioral data for downstream statistical
+                analysis.
+              </li>
             </ul>
           </div>
 
@@ -65,8 +73,14 @@
             <div class="entry-sub">Rice University · Sponsor: BroadVail Capital Partners</div>
             <p>RevPAR growth prediction for multifamily properties using ML regression.</p>
             <ul>
-              <li>Built end-to-end pipeline in Python (pandas, scikit-learn, LightGBM) with 304 engineered features over 10,527 samples.</li>
-              <li>Implemented hybrid stacking ensemble (RandomForest + GBDT + LightGBM) with Ridge meta-learner, achieving RMSE&nbsp;=&nbsp;0.0477 and R²&nbsp;=&nbsp;0.759.</li>
+              <li>
+                Built end-to-end pipeline in Python (pandas, scikit-learn, LightGBM) with 304
+                engineered features over 10,527 samples.
+              </li>
+              <li>
+                Implemented hybrid stacking ensemble (RandomForest + GBDT + LightGBM) with Ridge
+                meta-learner, achieving RMSE&nbsp;=&nbsp;0.0477 and R²&nbsp;=&nbsp;0.759.
+              </li>
             </ul>
           </div>
         </section>
@@ -82,10 +96,19 @@
               <span class="entry-date">Nov 2025 – Present</span>
             </div>
             <div class="entry-sub">Rice University · Advisor: Prof. Momona Yamagami</div>
-            <p>Biosignal gesture recognition using 88-channel EMG and IMU sensor data for VR/AR applications.</p>
+            <p>
+              Biosignal gesture recognition using 88-channel EMG and IMU sensor data for VR/AR
+              applications.
+            </p>
             <ul>
-              <li>Implemented hybrid 1D CNN + LSTM architecture in PyTorch, achieving 100% test accuracy.</li>
-              <li>Engineered comparative Template Matching baseline using PCA and Euclidean distance metrics.</li>
+              <li>
+                Implemented hybrid 1D CNN + LSTM architecture in PyTorch, achieving 100% test
+                accuracy.
+              </li>
+              <li>
+                Engineered comparative Template Matching baseline using PCA and Euclidean distance
+                metrics.
+              </li>
             </ul>
           </div>
 
@@ -94,11 +117,19 @@
               <span class="entry-title">Research Assistant — Materials Science</span>
               <span class="entry-date">Dec 2021 – Nov 2022</span>
             </div>
-            <div class="entry-sub">Beihang University · Advisor: Prof. Lin Guo (CAS Academician)</div>
+            <div class="entry-sub">
+              Beihang University · Advisor: Prof. Lin Guo (CAS Academician)
+            </div>
             <p>Sodium-ion battery anode materials research.</p>
             <ul>
-              <li>Introduced novel 2D amorphous iron sulfide-selenide nanosheets via constrained-region ion-exchange synthesis — first demonstration in literature.</li>
-              <li>Achieved first-cycle specific capacity of 883.69 mAh/g with 80% retention over 70 cycles.</li>
+              <li>
+                Introduced novel 2D amorphous iron sulfide-selenide nanosheets via
+                constrained-region ion-exchange synthesis — first demonstration in literature.
+              </li>
+              <li>
+                Achieved first-cycle specific capacity of 883.69 mAh/g with 80% retention over 70
+                cycles.
+              </li>
             </ul>
           </div>
 
@@ -112,8 +143,14 @@
             <div class="entry-sub">Lenovo Ltd., Beijing · HVAC Algorithm Control Group</div>
             <p>Training a Decision Pre-trained Transformer for multi-zone HVAC control.</p>
             <ul>
-              <li>Implemented decision transformer policy mapping historical context to next-step actions under operational constraints.</li>
-              <li>Leveraged JAX for accelerated training with containerized environments and reproducible experiment tracking.</li>
+              <li>
+                Implemented decision transformer policy mapping historical context to next-step
+                actions under operational constraints.
+              </li>
+              <li>
+                Leveraged JAX for accelerated training with containerized environments and
+                reproducible experiment tracking.
+              </li>
             </ul>
           </div>
 
@@ -159,8 +196,7 @@
         function textNodes(root) {
           const out = [];
           const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
-          while (w.nextNode())
-            if (w.currentNode.textContent.trim()) out.push(w.currentNode);
+          while (w.nextNode()) if (w.currentNode.textContent.trim()) out.push(w.currentNode);
           return out;
         }
 
@@ -168,10 +204,7 @@
           const nodes = textNodes(el);
           if (!nodes.length) return;
           const orig = nodes.map((n) => n.textContent);
-          const total = orig.reduce(
-            (s, t) => s + t.replace(/\s/g, "").length,
-            0
-          );
+          const total = orig.reduce((s, t) => s + t.replace(/\s/g, "").length, 0);
           if (!total) return;
           const perTick = Math.max(1, Math.ceil(total / (DECODE_MS / TICK)));
           let revealed = 0;
@@ -187,10 +220,7 @@
                   r += src[c];
                 } else {
                   count++;
-                  r +=
-                    count <= revealed
-                      ? src[c]
-                      : GLYPHS[(Math.random() * GLYPHS.length) | 0];
+                  r += count <= revealed ? src[c] : GLYPHS[(Math.random() * GLYPHS.length) | 0];
                 }
               }
               node.textContent = r;
@@ -206,18 +236,25 @@
         // all text-bearing elements in DOM (visual) order
         const lines = document.querySelectorAll(
           ".top, .content > h1, .content > .subtitle, .content > p:not(.subtitle), " +
-          ".section > h2, .section > h3, " +
-          ".entry-header, .entry-sub, .entry > p, .entry > ul, " +
-          "#experience > p:last-child, .footer"
+            ".section > h2, .section > h3, " +
+            ".entry-header, .entry-sub, .entry > p, .entry > ul, " +
+            "#experience > p:last-child, .footer",
         );
+
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          return;
+        }
 
         lines.forEach((el) => el.classList.add("scramble-line"));
 
         lines.forEach((el, i) => {
-          setTimeout(() => {
-            el.classList.add("active");
-            decode(el);
-          }, 180 + i * GAP);
+          setTimeout(
+            () => {
+              el.classList.add("active");
+              decode(el);
+            },
+            180 + i * GAP,
+          );
         });
       });
     </script>
