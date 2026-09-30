@@ -211,13 +211,19 @@
           "#experience > p:last-child, .footer"
         );
 
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
         lines.forEach((el) => el.classList.add("scramble-line"));
 
         lines.forEach((el, i) => {
-          setTimeout(() => {
+          if (prefersReducedMotion) {
             el.classList.add("active");
-            decode(el);
-          }, 180 + i * GAP);
+          } else {
+            setTimeout(() => {
+              el.classList.add("active");
+              decode(el);
+            }, 180 + i * GAP);
+          }
         });
       });
     </script>
