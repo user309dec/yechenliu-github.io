@@ -206,18 +206,29 @@
         // all text-bearing elements in DOM (visual) order
         const lines = document.querySelectorAll(
           ".top, .content > h1, .content > .subtitle, .content > p:not(.subtitle), " +
-          ".section > h2, .section > h3, " +
-          ".entry-header, .entry-sub, .entry > p, .entry > ul, " +
-          "#experience > p:last-child, .footer"
+            ".section > h2, .section > h3, " +
+            ".entry-header, .entry-sub, .entry > p, .entry > ul, " +
+            "#experience > p:last-child, .footer",
         );
 
         lines.forEach((el) => el.classList.add("scramble-line"));
 
+        const prefersReducedMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+
         lines.forEach((el, i) => {
-          setTimeout(() => {
+          if (prefersReducedMotion) {
             el.classList.add("active");
-            decode(el);
-          }, 180 + i * GAP);
+          } else {
+            setTimeout(
+              () => {
+                el.classList.add("active");
+                decode(el);
+              },
+              180 + i * GAP,
+            );
+          }
         });
       });
     </script>
